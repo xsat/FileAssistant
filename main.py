@@ -1,6 +1,9 @@
 from tkinter import Tk, Frame, Label, Button, filedialog
 from os import walk
 
+DIRECTORY_SEPARATOR: str = "/"
+ALTERNATIVE_DIRECTORY_SEPARATOR: str = "\\"
+
 
 def test() -> None:
     tree: dict = {}
@@ -9,7 +12,10 @@ def test() -> None:
     for (directory_path, directories, files) in walk(directory):
         prev: dict = tree
 
-        for inner_directory in directory_path.replace("\\", "/").split("/"):
+        for inner_directory in directory_path.replace(
+            ALTERNATIVE_DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR
+        ).split(DIRECTORY_SEPARATOR):
             if inner_directory not in tree:
                 tree[inner_directory]: dict = {}
 
